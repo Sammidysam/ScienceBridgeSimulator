@@ -3,6 +3,7 @@ using System.Drawing;
 using OpenTK;
 using OpenTK.Graphics.OpenGL;
 using OpenTK.Input;
+using Bridges;
 
 namespace Essentials {
 	public class Start : GameWindow {
@@ -10,6 +11,7 @@ namespace Essentials {
 		private double elapsedTime;
 		private Drawer drawer = new Drawer();
 		private Button exit;
+		private Button[] bridgeButtons = new Button[5];
 		private bool started = false;
 		public Start() : base(DisplayDevice.Default.Width, DisplayDevice.Default.Height){
 			Keyboard.KeyDown += Keyboard_KeyDown;
@@ -34,7 +36,12 @@ namespace Essentials {
 		protected override void OnLoad(EventArgs e){
             this.Title = "C# OpenGL Window";
             this.WindowState = WindowState.Fullscreen;
-            exit = new Button(0.95f, 0.95f, 0.05f, 0.05f, Color.DarkRed);
+            exit = new Button(0.9f, 0.85f, 0.1f, 0.15f, Color.DarkRed, "C:\\Users\\Sam\\Documents\\SharpDevelop Projects\\Console\\ScienceBridgeSimulator\\res\\x.png");
+//          add relative path
+//            Bridge bridge = new Bridge();
+//			for(int i = 0; i < 5; i++)
+//				bridgeButtons[i] = bridge.getName(i);
+//			add images for all other buttons
         }
 		protected override void OnResize(EventArgs e){
             GL.Viewport(0, 0, Width, Height);
@@ -49,18 +56,23 @@ namespace Essentials {
 				elapsedTime = 0;
 			}
 			if(this.Mouse != null){
-				var minX = this.Width * 0.975;
-				var minY = this.Height * 0.025;
-				if(this.Mouse.X >= minX && this.Mouse.Y <= minY && mouseDown)
-					this.Exit();
+				if(exit.over(this.Mouse.X, this.Mouse.Y, this.Width, this.Height)){
+					exit.setColor(Color.Red);
+					if(mouseDown)
+						this.Exit();
+				}
+				else
+					exit.setColor(Color.DarkRed);
 			}
+			if(!started && mouseDown)
+				started = true;
         }
 		protected override void OnRenderFrame(FrameEventArgs e){
-			drawer.render();
+			drawer.render(started);
 			exit.draw();
 			this.SwapBuffers();
         }
-		public static void Main(String[] args){
+		public static void Main(string[] args){
             using (Start start = new Start()){
 				Console.WriteLine("Running...");
                 start.Run(20, 60);

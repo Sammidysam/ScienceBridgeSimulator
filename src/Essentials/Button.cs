@@ -8,22 +8,47 @@ namespace Essentials {
 		private float width;
 		private float height;
 		private Color color;
-		public Button(float x, float y, float width, float height, Color color){
+		private string overlayPath;
+		public Button(float x, float y, float width, float height, Color color, string overlayPath){
 			this.x = x;
 			this.y = y;
 			this.width = width;
 			this.height = height;
 			this.color = color;
+			this.overlayPath = overlayPath;
 		}
 		public void draw(){
 			GL.Color3(color);
 			GL.Begin(BeginMode.Quads);
-			GL.Vertex2(0.95f, 0.95f);
-			GL.Vertex2(0.95f, 1.0f);
-			GL.Vertex2(1.0f, 1.0f);
-			GL.Vertex2(1.0f, 0.95f);
+			GL.Vertex2(x, y);
+			GL.Vertex2(x, y + height);
+			GL.Vertex2(x + width, y + height);
+			GL.Vertex2(x + width, y);
 			GL.End();
-			
+			GL.Enable(EnableCap.Texture2D);
+			GL.BindTexture(TextureTarget.Texture2D, TextureHelper.loadTexture(overlayPath));
+			GL.Begin(BeginMode.Quads);
+			GL.TexCoord2(0.0, 0.0);
+			GL.Vertex2(x, y);
+			GL.TexCoord2(0.0, 1.0);
+			GL.Vertex2(x, y + height);
+			GL.TexCoord2(1.0, 1.0);
+			GL.Vertex2(x + width, y + height);
+			GL.TexCoord2(1.0, 0.0);
+			GL.Vertex2(x + width, y);
+			GL.End();
+			GL.Disable(EnableCap.Texture2D);
+		}
+		public bool over(int mouseX, int mouseY, int screenWidth, int screenHeight){
+			var minX = screenWidth * (x + (width / 2));
+			var minY = screenHeight * ((1.0f - y) - (height / 2));
+			if(mouseX >= minX && mouseY <= minY)
+				return true;
+			else
+				return false;
+		}
+		public void setColor(Color color){
+			this.color = color;
 		}
 	}
 }
