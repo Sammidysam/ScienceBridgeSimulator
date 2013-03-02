@@ -9,7 +9,7 @@ namespace Bridges {
 			Console.WriteLine(getName(type));
 		}
 		public string getName(int type){
-			switch(type){
+			switch (type){
 				case 0:
 					return "Vine Footbridge";
 				case 1:
@@ -17,7 +17,7 @@ namespace Bridges {
 				case 2:
 					return "Suspension Bridge";
 				case 3:
-					return "Cantilever Bridge";
+					return "Truss Bridge";
 				case 4:
 					return "Arch Bridge";
 				default:

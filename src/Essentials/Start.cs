@@ -8,7 +8,8 @@ using Bridges;
 namespace Essentials {
 	public class Start : GameWindow {
 		private bool mouseDown = false;
-		private double elapsedTime;
+		private double waterTime;
+		private double bridgeTime;
 		private Drawer drawer = new Drawer();
 		private Button exit;
 		private Button[] bridgeButtons = new Button[5];
@@ -34,14 +35,12 @@ namespace Essentials {
 			mouseDown = false;
 		}
 		protected override void OnLoad(EventArgs e){
-            this.Title = "C# OpenGL Window";
+            this.Title = "Science Bridge Simulator";
             this.WindowState = WindowState.Fullscreen;
             exit = new Button(0.9f, 0.85f, 0.1f, 0.15f, Color.DarkRed, "C:\\Users\\Sam\\Documents\\SharpDevelop Projects\\Console\\ScienceBridgeSimulator\\res\\x.png");
-//          add relative path
-//            Bridge bridge = new Bridge();
-//			for(int i = 0; i < 5; i++)
-//				bridgeButtons[i] = bridge.getName(i);
-//			add images for all other buttons
+            Bridge bridge = new Bridge();
+			for(int i = 0; i < bridgeButtons.Length; i++)
+				bridgeButtons[i] = new Button(-0.95f, 0.45f + (i * -0.3f), 0.725f, 0.2f, Color.White, "C:\\Users\\Sam\\Documents\\SharpDevelop Projects\\Console\\ScienceBridgeSimulator\\res\\" + bridge.getName(i) + ".png");
         }
 		protected override void OnResize(EventArgs e){
             GL.Viewport(0, 0, Width, Height);
@@ -50,10 +49,15 @@ namespace Essentials {
             GL.Ortho(-1.0, 1.0, -1.0, 1.0, 0.0, 4.0);
         }
 		protected override void OnUpdateFrame(FrameEventArgs e){
-			elapsedTime += e.Time;
-			if(elapsedTime > 0.5){
+			waterTime += e.Time;
+			bridgeTime += e.Time;
+			if(waterTime > 0.5){
 				drawer.updateEnvironment();
-				elapsedTime = 0;
+				waterTime = 0;
+			}
+			if(bridgeTime > 3.0){
+				drawer.nextBridge();
+				bridgeTime = 0;
 			}
 			if(this.Mouse != null){
 				if(exit.over(this.Mouse.X, this.Mouse.Y, this.Width, this.Height)){
@@ -63,12 +67,27 @@ namespace Essentials {
 				}
 				else
 					exit.setColor(Color.DarkRed);
+				for(int i = 0; i < bridgeButtons.Length; i++){
+					if(bridgeButtons[i].over(this.Mouse.X, this.Mouse.Y, this.Width, this.Height)){
+						bridgeButtons[i].setColor(Color.Red);
+						drawer.setBridge(i);
+					}
+					else
+						bridgeButtons[i].setColor(Color.White);
+				}
+				bool overOne = false;
+				for(int i = 0; i < bridgeButtons.Length; i++)
+					if(bridgeButtons[i].over(this.Mouse.X, this.Mouse.Y, this.Width, this.Height))
+						overOne = true;
+				if(!started && mouseDown && overOne)
+					started = true;
 			}
-			if(!started && mouseDown)
-				started = true;
         }
 		protected override void OnRenderFrame(FrameEventArgs e){
 			drawer.render(started);
+			if(!started)
+				for(int i = 0; i < bridgeButtons.Length; i++)
+					bridgeButtons[i].draw();
 			exit.draw();
 			this.SwapBuffers();
         }
