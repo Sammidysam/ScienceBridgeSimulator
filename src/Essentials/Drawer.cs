@@ -8,28 +8,58 @@ namespace Essentials {
 		private bool waterGoingUp = true;
 		private Water water = new Water();
 		private int currentBridge = 0;
-		public void render(bool started){
+		public void render(bool started, bool vehicleMoving){
 			GL.Clear(ClearBufferMask.ColorBufferBit);
 			if(started){
 				GL.ClearColor(Color.SkyBlue);
 				water.draw();
+				GL.Color3(Color.ForestGreen);
+				GL.Begin(BeginMode.Triangles);
+				GL.Vertex2(-1.0f, 0.01f);
+				GL.Vertex2(-1.0f, -1.0f);
+				GL.Vertex2(-0.24f, -1.0f);
+				GL.End();
 				GL.Color3(Color.SaddleBrown);
 				GL.Begin(BeginMode.Triangles);
 				GL.Vertex2(-1.0f, 0);
 				GL.Vertex2(-1.0f, -1.0f);
 				GL.Vertex2(-0.25f, -1.0f);
 				GL.End();
+				GL.Color3(Color.ForestGreen);
+				GL.Begin(BeginMode.Triangles);
+				GL.Vertex2(1.0f, 0.01f);
+				GL.Vertex2(1.0f, -1.0f);
+				GL.Vertex2(0.24f, -1.0f);
+				GL.End();
+				GL.Color3(Color.SaddleBrown);
 				GL.Begin(BeginMode.Triangles);
 				GL.Vertex2(1.0f, 0);
 				GL.Vertex2(1.0f, -1.0f);
 				GL.Vertex2(0.25f, -1.0f);
 				GL.End();
+				GL.Color3(Color.White);
+				GL.Enable(EnableCap.Texture2D);
+				if(!vehicleMoving)
+					GL.BindTexture(TextureTarget.Texture2D, TextureHelper.loadTexture(PathGetter.getPath("res\\go.png")));
+				else
+					GL.BindTexture(TextureTarget.Texture2D, TextureHelper.loadTexture(PathGetter.getPath("res\\stop.png")));
+				GL.Begin(BeginMode.Quads);
+				GL.TexCoord2(0.0, 1.0);
+				GL.Vertex2(0.8f, 0.45f);
+				GL.TexCoord2(0.0, 0.0);
+				GL.Vertex2(0.8f, 0.75f);
+				GL.TexCoord2(1.0, 0.0);
+				GL.Vertex2(1.0f, 0.75f);
+				GL.TexCoord2(1.0, 1.0);
+				GL.Vertex2(1.0f, 0.45f);
+				GL.End();
+				GL.Disable(EnableCap.Texture2D);
 			}
 			else {
 				GL.ClearColor(Color.Black);
 				GL.Color3(Color.White);
 				GL.Enable(EnableCap.Texture2D);
-				GL.BindTexture(TextureTarget.Texture2D, TextureHelper.loadTexture("C:\\Users\\Sam\\Documents\\SharpDevelop Projects\\Console\\ScienceBridgeSimulator\\res\\directions.png"));
+				GL.BindTexture(TextureTarget.Texture2D, TextureHelper.loadTexture(PathGetter.getPath("res\\directions.png")));
 				GL.Begin(BeginMode.Quads);
 				GL.TexCoord2(0.0, 1.0);
 				GL.Vertex2(-1.0f, 0.8f);
@@ -79,15 +109,15 @@ namespace Essentials {
 		private string getBridgeLocation(int bridgeNumber){
 			switch (bridgeNumber){
 				case 0:
-					return "C:\\Users\\Sam\\Documents\\SharpDevelop Projects\\Console\\ScienceBridgeSimulator\\res\\footbridge.jpg";
+					return PathGetter.getPath("res\\footbridge.jpg");
 				case 1:
-					return "C:\\Users\\Sam\\Documents\\SharpDevelop Projects\\Console\\ScienceBridgeSimulator\\res\\beambridge.jpg";
+					return PathGetter.getPath("res\\beambridge.jpg");
 				case 2:
-					return "C:\\Users\\Sam\\Documents\\SharpDevelop Projects\\Console\\ScienceBridgeSimulator\\res\\suspensionbridge.jpg";
+					return PathGetter.getPath("res\\suspensionbridge.jpg");
 				case 3:
-					return "C:\\Users\\Sam\\Documents\\SharpDevelop Projects\\Console\\ScienceBridgeSimulator\\res\\trussbridge.jpg";
+					return PathGetter.getPath("res\\trussbridge.jpg");
 				case 4:
-					return "C:\\Users\\Sam\\Documents\\SharpDevelop Projects\\Console\\ScienceBridgeSimulator\\res\\archbridge.jpg";
+					return PathGetter.getPath("res\\archbridge.jpg");
 				default:
 					throw new System.Exception();
 			}

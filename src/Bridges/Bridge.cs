@@ -4,9 +4,11 @@ namespace Bridges {
 	public class Bridge {
 		private Random rand = new Random();
 		private int type;
-		public Bridge(){
-			type = rand.Next(0, 4);
-			Console.WriteLine(getName(type));
+		public Bridge(int type){
+			this.type = type;
+		}
+		public virtual void draw(){
+			
 		}
 		public string getName(int type){
 			switch (type){
