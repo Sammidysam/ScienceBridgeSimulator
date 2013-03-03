@@ -64,5 +64,8 @@ namespace Essentials {
 		public void setOn(bool on){
 			this.on = on;
 		}
+		public bool getOn(){
+			return on;
+		}
 	}
 }

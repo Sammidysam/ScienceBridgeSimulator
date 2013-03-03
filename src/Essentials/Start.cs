@@ -5,6 +5,7 @@ using OpenTK.Graphics.OpenGL;
 using OpenTK.Input;
 using Bridges;
 using Load;
+using System.Collections.Generic;
 
 namespace Essentials {
 	public class Start : GameWindow {
@@ -14,10 +15,15 @@ namespace Essentials {
 		private Drawer drawer = new Drawer();
 		private Button exit;
 		private Button[] bridgeButtons = new Button[5];
+		private Button go;
+		private Button stop;
+		private Button[] add = new Button[6];
 		private bool started = false;
 		private Random rand = new Random();
 		private Bridge bridge;
-		private Vehicle truck = new Truck();
+		private List<Vehicle> vehicles = new List<Vehicle>(0);
+		private double clickWait = 0;
+		private bool waiting = false;
 		public Start() : base(DisplayDevice.Default.Width, DisplayDevice.Default.Height){
 			Keyboard.KeyDown += Keyboard_KeyDown;
 			Mouse.ButtonDown += Mouse_ButtonDown;
@@ -42,9 +48,12 @@ namespace Essentials {
             this.Title = "Science Bridge Simulator";
             this.WindowState = WindowState.Fullscreen;
             exit = new Button(0.9f, 0.85f, 0.1f, 0.15f, Color.DarkRed, PathGetter.getPath("res\\x.png"), true);
-            Bridge bridge = new Bridge(rand.Next(0, 4));
 			for(int i = 0; i < bridgeButtons.Length; i++)
-				bridgeButtons[i] = new Button(-0.95f, 0.45f + (i * -0.3f), 0.725f, 0.2f, Color.White, PathGetter.getPath("res\\" + bridge.getName(i) + ".png"), true);
+				bridgeButtons[i] = new Button(-0.95f, 0.45f + (i * -0.3f), 0.725f, 0.2f, Color.White, PathGetter.getPath("res\\" + Bridge.getName(i) + ".png"), true);
+			go = new Button(0.8f, 0.5f, 0.2f, 0.3f, Color.White, PathGetter.getPath("res\\go.png"), true);
+			stop = new Button(0.8f, 0.5f, 0.2f, 0.3f, Color.White, PathGetter.getPath("res\\stop.png"), false);
+			for(int i = 0; i < add.Length; i++)
+				add[i] = new Button(0.8f - (i * 0.15f), 0.85f, 0.1f, 0.15f, Color.White, PathGetter.getPath(Vehicle.getPath(i)), false);
 			GL.Enable(EnableCap.Blend);
 			GL.BlendFunc(BlendingFactorSrc.SrcAlpha, BlendingFactorDest.OneMinusSrcAlpha);
 		}
@@ -57,6 +66,8 @@ namespace Essentials {
 		protected override void OnUpdateFrame(FrameEventArgs e){
 			waterTime += e.Time;
 			bridgeTime += e.Time;
+			if(waiting)
+				clickWait += e.Time;
 			if(waterTime > 0.5){
 				drawer.updateEnvironment();
 				waterTime = 0;
@@ -65,11 +76,21 @@ namespace Essentials {
 				drawer.nextBridge();
 				bridgeTime = 0;
 			}
+			if(clickWait > 0.2){
+				waiting = false;
+				clickWait = 0;
+			}
 			if(this.Mouse != null){
 				if(exit.over(this.Mouse.X, this.Mouse.Y, this.Width, this.Height)){
 					exit.setColor(Color.Red);
-					if(mouseDown)
-						this.Exit();
+					if(mouseDown && !waiting){
+						if(started){
+							started = false;
+							vehicles.Clear();
+						}
+						else
+							this.Exit();
+					}
 				}
 				else
 					exit.setColor(Color.DarkRed);
@@ -88,21 +109,66 @@ namespace Essentials {
 						overOne = true;
 						overWhich = i;
 					}
-				if(!started && mouseDown && overOne){
-					started = true;
-					bridge = new Bridge(overWhich);
+				if(started)
+					for(int i = 0; i < add.Length; i++)
+						if(add[i].over(this.Mouse.X, this.Mouse.Y, this.Width, this.Height)){
+							overOne = true;
+							overWhich = i;
+						}
+				if(mouseDown){
+					if(overOne && started && overWhich < add.Length && !waiting){
+						vehicles.Add(Vehicle.getVehicle(overWhich));
+						vehicles[vehicles.Count - 1].setMoving(vehicles[0].getMoving());
+					}
+					if(!started && overOne){
+						started = true;
+						if(vehicles.Count == 0)
+							vehicles.Add(new Person());
+						for(int i = 0; i < add.Length; i++)
+							add[i].setOn(true);
+						go.setOn(true);
+						stop.setOn(false);
+						bridge = Bridge.getBridge(overWhich);
+					}
+					else if((go.over(this.Mouse.X, this.Mouse.Y, this.Width, this.Height) || stop.over(this.Mouse.X, this.Mouse.Y, this.Width, this.Height)) && !waiting){
+						for(int i = 0; i < vehicles.Count; i++)
+							vehicles[i].setMoving(!vehicles[i].getMoving());
+						go.setOn(!go.getOn());
+						stop.setOn(!stop.getOn());
+					}
+					waiting = true;
 				}
 			}
-			if(started)
-				truck.increaseX(0.01f);
+			if(started){
+				int totalWeight = 0;
+				for(int i = 0; i < vehicles.Count; i++)
+					totalWeight += vehicles[i].getWeight();
+				if(totalWeight > bridge.maxWeight()){
+					bridge.fall(0.01f);
+					for(int i = 0; i < vehicles.Count; i++)
+						vehicles[i].increaseY(-0.01f);
+				}
+				else if(vehicles[0].getMoving()){
+					for(int i = 0; i < vehicles.Count; i++){
+						vehicles[i].increaseX(0.01f);
+						vehicles[i].setY(bridge.getYAtX(vehicles[i].getX()));
+					}
+				}
+			}
         }
 		protected override void OnRenderFrame(FrameEventArgs e){
-			drawer.render(started, truck.getMoving());
+			drawer.render(started, bridge);
 			if(!started)
 				for(int i = 0; i < bridgeButtons.Length; i++)
 					bridgeButtons[i].draw();
-			else
-				truck.draw(this.Width, this.Height);
+			else {
+				for(int i = 0; i < vehicles.Count; i++)
+					vehicles[i].draw(this.Width, this.Height);
+				go.draw();
+				stop.draw();
+				for(int i = 0; i < add.Length; i++)
+					add[i].draw();
+			}
 			exit.draw();
 			this.SwapBuffers();
         }
