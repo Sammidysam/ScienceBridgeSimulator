@@ -64,6 +64,7 @@ namespace Essentials {
             GL.Ortho(-1.0, 1.0, -1.0, 1.0, 0.0, 4.0);
         }
 		protected override void OnUpdateFrame(FrameEventArgs e){
+			GC.Collect();
 			waterTime += e.Time;
 			bridgeTime += e.Time;
 			if(waiting)
