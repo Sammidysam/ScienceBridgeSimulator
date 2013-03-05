@@ -176,7 +176,7 @@ namespace Essentials {
 		public static void Main(string[] args){
             using (Start start = new Start()){
 				Console.WriteLine("Running...");
-                start.Run(20, 60);
+                start.Run(20, 20);
             }
         }
 	}
