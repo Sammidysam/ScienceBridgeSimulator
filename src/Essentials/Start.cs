@@ -12,7 +12,7 @@ namespace Essentials {
 		private bool mouseDown = false;
 		private double waterTime;
 		private double bridgeTime;
-		private Drawer drawer = new Drawer();
+		private Drawer drawer;
 		private Button exit;
 		private Button[] bridgeButtons = new Button[5];
 		private Button go;
@@ -54,6 +54,7 @@ namespace Essentials {
 			stop = new Button(0.8f, 0.5f, 0.2f, 0.3f, Color.White, PathGetter.getPath("res\\stop.png"), false);
 			for(int i = 0; i < add.Length; i++)
 				add[i] = new Button(0.8f - (i * 0.15f), 0.85f, 0.1f, 0.15f, Color.White, PathGetter.getPath(Vehicle.getPath(i)), false);
+			drawer = new Drawer();
 			GL.Enable(EnableCap.Blend);
 			GL.BlendFunc(BlendingFactorSrc.SrcAlpha, BlendingFactorDest.OneMinusSrcAlpha);
 		}
@@ -87,6 +88,8 @@ namespace Essentials {
 					if(mouseDown && !waiting){
 						if(started){
 							started = false;
+							for(int i = 0; i < vehicles.Count; i++)
+								GL.DeleteTexture(vehicles[i].getTexture());
 							vehicles.Clear();
 						}
 						else
@@ -119,12 +122,10 @@ namespace Essentials {
 				if(mouseDown){
 					if(overOne && started && overWhich < add.Length && !waiting){
 						vehicles.Add(Vehicle.getVehicle(overWhich));
-						vehicles[vehicles.Count - 1].setMoving(vehicles[0].getMoving());
+						vehicles[vehicles.Count - 1].setMoving(stop.getOn());
 					}
 					if(!started && overOne){
 						started = true;
-						if(vehicles.Count == 0)
-							vehicles.Add(new Person());
 						for(int i = 0; i < add.Length; i++)
 							add[i].setOn(true);
 						go.setOn(true);
@@ -149,15 +150,18 @@ namespace Essentials {
 					for(int i = 0; i < vehicles.Count; i++)
 						vehicles[i].increaseY(-0.01f);
 				}
-				else if(vehicles[0].getMoving()){
-					for(int i = 0; i < vehicles.Count; i++){
-						vehicles[i].increaseX(0.01f);
-						vehicles[i].setY(bridge.getYAtX(vehicles[i].getX()));
+				else if(vehicles.Count > 0){
+					if(vehicles[0].getMoving()){
+						for(int i = 0; i < vehicles.Count; i++){
+							vehicles[i].increaseX(0.01f);
+							vehicles[i].setY(bridge.getYAtX(vehicles[i].getX()));
+						}
 					}
 				}
 			}
         }
 		protected override void OnRenderFrame(FrameEventArgs e){
+			GC.Collect();
 			drawer.render(started, bridge);
 			if(!started)
 				for(int i = 0; i < bridgeButtons.Length; i++)

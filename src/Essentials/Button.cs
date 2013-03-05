@@ -11,6 +11,7 @@ namespace Essentials {
 		private Color color;
 		private string overlayPath;
 		private bool on = true;
+		private int texture;
 		public Button(float x, float y, float width, float height, Color color, string overlayPath, bool on){
 			this.x = x;
 			this.y = y;
@@ -19,12 +20,13 @@ namespace Essentials {
 			this.color = color;
 			this.overlayPath = overlayPath;
 			this.on = on;
+			this.texture = TextureHelper.loadTexture(this.overlayPath);
 		}
 		public void draw(){
 			if(on){
 				GL.Color3(color);
 				GL.Enable(EnableCap.Texture2D);
-				GL.BindTexture(TextureTarget.Texture2D, TextureHelper.loadTexture(overlayPath));
+				GL.BindTexture(TextureTarget.Texture2D, texture);
 				GL.Begin(BeginMode.Quads);
 				GL.TexCoord2(0.0, 1.0);
 				GL.Vertex2(x, y);

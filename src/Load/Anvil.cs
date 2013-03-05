@@ -4,6 +4,9 @@ using OpenTK.Graphics.OpenGL;
 
 namespace Load {
 	public class Anvil : Vehicle {
+		public Anvil() : base(4){
+			
+		}
 		public override int getWeight(){
 			return 200;
 		}
@@ -12,7 +15,7 @@ namespace Load {
 			float height = 48 / (float)(screenHeight);
 			GL.Color3(Color.White);
 			GL.Enable(EnableCap.Texture2D);
-			GL.BindTexture(TextureTarget.Texture2D, TextureHelper.loadTexture(PathGetter.getPath("res\\anvil.png")));
+			GL.BindTexture(TextureTarget.Texture2D, texture);
 			GL.Begin(BeginMode.Quads);
 			GL.TexCoord2(0.0, 1.0);
 			GL.Vertex2(x, y);

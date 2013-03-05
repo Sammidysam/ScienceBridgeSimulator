@@ -9,6 +9,13 @@ namespace Essentials {
 		private bool waterGoingUp = true;
 		private Water water = new Water();
 		private int currentBridge = 0;
+		private int directionsTexture;
+		private int[] bridgeTextures = new int[5];
+		public Drawer(){
+			directionsTexture = TextureHelper.loadTexture(PathGetter.getPath("res\\directions.png"));
+			for(int i = 0; i < bridgeTextures.Length; i++)
+				bridgeTextures[i] = TextureHelper.loadTexture(PathGetter.getPath(getBridgeLocation(i)));
+		}
 		public void render(bool started, Bridge bridge){
 			GL.Clear(ClearBufferMask.ColorBufferBit);
 			if(started){
@@ -44,7 +51,7 @@ namespace Essentials {
 				GL.ClearColor(Color.Black);
 				GL.Color3(Color.White);
 				GL.Enable(EnableCap.Texture2D);
-				GL.BindTexture(TextureTarget.Texture2D, TextureHelper.loadTexture(PathGetter.getPath("res\\directions.png")));
+				GL.BindTexture(TextureTarget.Texture2D, directionsTexture);
 				GL.Begin(BeginMode.Quads);
 				GL.TexCoord2(0.0, 1.0);
 				GL.Vertex2(-1.0f, 0.8f);
@@ -55,7 +62,7 @@ namespace Essentials {
 				GL.TexCoord2(1.0, 1.0);
 				GL.Vertex2(0.3f, 0.8f);
 				GL.End();
-				GL.BindTexture(TextureTarget.Texture2D, TextureHelper.loadTexture(getBridgeLocation(currentBridge)));
+				GL.BindTexture(TextureTarget.Texture2D, bridgeTextures[currentBridge]);
 				GL.Begin(BeginMode.Quads);
 				GL.TexCoord2(0.0, 1.0);
 				GL.Vertex2(-0.2f, -1.0f);

@@ -1,8 +1,17 @@
-﻿namespace Load {
+﻿using System;
+using Essentials;
+
+namespace Load {
 	public class Vehicle {
 		protected float x = -1.0f;
 		protected float y = 0;
 		protected bool moving = false;
+		protected int type;
+		protected int texture;
+		public Vehicle(int type){
+			this.type = type;
+			this.texture = TextureHelper.loadTexture(getPath(this.type));
+		}
 		public virtual int getWeight(){
 			return 0;
 		}
@@ -63,6 +72,9 @@
 				default:
 					throw new System.Exception();
 			}
+		}
+		public int getTexture(){
+			return this.texture;
 		}
 	}
 }
