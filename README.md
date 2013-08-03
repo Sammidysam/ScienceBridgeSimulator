@@ -7,3 +7,5 @@ License
 =======
 
 This program is licensed under the GNU General Public License version 3. To see the license, visit the file [LICENSE](LICENSE).
+
+This program uses the library OpenTK.  To see the license for it, visit the file [OPENTK_LICENSE](OPENTK_LICENSE).
