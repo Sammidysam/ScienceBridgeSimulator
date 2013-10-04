@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Drawing;
+using System.IO;
 using OpenTK;
 using OpenTK.Graphics.OpenGL;
 using OpenTK.Input;
@@ -47,11 +48,11 @@ namespace Essentials {
 		protected override void OnLoad(EventArgs e){
             this.Title = "Science Bridge Simulator";
             this.WindowState = WindowState.Fullscreen;
-            exit = new Button(0.9f, 0.85f, 0.1f, 0.15f, Color.DarkRed, PathGetter.getPath("res\\x.png"), true);
+            exit = new Button(0.9f, 0.85f, 0.1f, 0.15f, Color.DarkRed, PathGetter.getPath("res" + Path.DirectorySeparatorChar + "x.png"), true);
 			for(int i = 0; i < bridgeButtons.Length; i++)
-				bridgeButtons[i] = new Button(-0.95f, 0.45f + (i * -0.3f), 0.725f, 0.2f, Color.White, PathGetter.getPath("res\\" + Bridge.getName(i) + ".png"), true);
-			go = new Button(0.8f, 0.5f, 0.2f, 0.3f, Color.White, PathGetter.getPath("res\\go.png"), true);
-			stop = new Button(0.8f, 0.5f, 0.2f, 0.3f, Color.White, PathGetter.getPath("res\\stop.png"), false);
+				bridgeButtons[i] = new Button(-0.95f, 0.45f + (i * -0.3f), 0.725f, 0.2f, Color.White, PathGetter.getPath("res" + Path.DirectorySeparatorChar + Bridge.getName(i) + ".png"), true);
+			go = new Button(0.8f, 0.5f, 0.2f, 0.3f, Color.White, PathGetter.getPath("res" + Path.DirectorySeparatorChar + "go.png"), true);
+			stop = new Button(0.8f, 0.5f, 0.2f, 0.3f, Color.White, PathGetter.getPath("res" + Path.DirectorySeparatorChar + "stop.png"), false);
 			for(int i = 0; i < add.Length; i++)
 				add[i] = new Button(0.8f - (i * 0.15f), 0.85f, 0.1f, 0.15f, Color.White, PathGetter.getPath(Vehicle.getPath(i)), false);
 			drawer = new Drawer();
@@ -177,7 +178,7 @@ namespace Essentials {
 			exit.draw();
 			this.SwapBuffers();
         }
-		public static void Main(string[] args){
+		public static void Main(string[] args){		
             using (Start start = new Start()){
 				Console.WriteLine("Running...");
                 start.Run(20, 20);

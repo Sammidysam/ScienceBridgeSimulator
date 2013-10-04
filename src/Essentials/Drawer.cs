@@ -2,6 +2,7 @@
 using OpenTK.Graphics.OpenGL;
 using Environment;
 using System;
+using System.IO;
 using Bridges;
 
 namespace Essentials {
@@ -12,7 +13,7 @@ namespace Essentials {
 		private int directionsTexture;
 		private int[] bridgeTextures = new int[5];
 		public Drawer(){
-			directionsTexture = TextureHelper.loadTexture(PathGetter.getPath("res\\directions.png"));
+			directionsTexture = TextureHelper.loadTexture(PathGetter.getPath("res" + Path.DirectorySeparatorChar + "directions.png"));
 			for(int i = 0; i < bridgeTextures.Length; i++)
 				bridgeTextures[i] = TextureHelper.loadTexture(PathGetter.getPath(getBridgeLocation(i)));
 		}
@@ -101,15 +102,15 @@ namespace Essentials {
 		private string getBridgeLocation(int bridgeNumber){
 			switch (bridgeNumber){
 				case 0:
-					return PathGetter.getPath("res\\footbridge.jpg");
+					return PathGetter.getPath("res" + Path.DirectorySeparatorChar + "footbridge.jpg");
 				case 1:
-					return PathGetter.getPath("res\\beambridge.jpg");
+					return PathGetter.getPath("res" + Path.DirectorySeparatorChar + "beambridge.jpg");
 				case 2:
-					return PathGetter.getPath("res\\suspensionbridge.jpg");
+					return PathGetter.getPath("res" + Path.DirectorySeparatorChar + "suspensionbridge.jpg");
 				case 3:
-					return PathGetter.getPath("res\\trussbridge.jpg");
+					return PathGetter.getPath("res" + Path.DirectorySeparatorChar + "trussbridge.jpg");
 				case 4:
-					return PathGetter.getPath("res\\archbridge.jpg");
+					return PathGetter.getPath("res" + Path.DirectorySeparatorChar + "archbridge.jpg");
 				default:
 					throw new System.Exception();
 			}

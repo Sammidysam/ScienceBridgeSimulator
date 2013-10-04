@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using Essentials;
 
 namespace Load {
@@ -58,17 +59,17 @@ namespace Load {
 		public static string getPath(int type){
 			switch (type){
 				case 0:
-					return "res\\truck.png";
+					return "res" + Path.DirectorySeparatorChar + "truck.png";
 				case 1:
-					return "res\\person.png";
+					return "res" + Path.DirectorySeparatorChar + "person.png";
 				case 2:
-					return "res\\train.png";
+					return "res" + Path.DirectorySeparatorChar + "train.png";
 				case 3:
-					return "res\\elephant.png";
+					return "res" + Path.DirectorySeparatorChar + "elephant.png";
 				case 4:
-					return "res\\anvil.png";
+					return "res" + Path.DirectorySeparatorChar + "anvil.png";
 				case 5:
-					return "res\\spaceshuttle.png";
+					return "res" + Path.DirectorySeparatorChar + "spaceshuttle.png";
 				default:
 					throw new System.Exception();
 			}
