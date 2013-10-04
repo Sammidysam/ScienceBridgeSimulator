@@ -1,0 +1,7 @@
+1500
+5000000
+26000000
+1200000
+10000000
+
+Order: Vine Footbridge, Beam Bridge, Suspension Bridge, Truss Bridge, Arch Bridge
