@@ -12,7 +12,8 @@ namespace Essentials {
 		private string overlayPath;
 		private bool on = true;
 		private int texture;
-		public Button(float x, float y, float width, float height, Color color, string overlayPath, bool on){
+		private bool flipX;
+		public Button(float x, float y, float width, float height, Color color, string overlayPath, bool on, bool flipX = false){
 			this.x = x;
 			this.y = y;
 			this.width = width;
@@ -21,6 +22,7 @@ namespace Essentials {
 			this.overlayPath = overlayPath;
 			this.on = on;
 			this.texture = TextureHelper.loadTexture(this.overlayPath);
+			this.flipX = flipX;
 		}
 		public void draw(){
 			if(on){
@@ -28,13 +30,13 @@ namespace Essentials {
 				GL.Enable(EnableCap.Texture2D);
 				GL.BindTexture(TextureTarget.Texture2D, texture);
 				GL.Begin(BeginMode.Quads);
-				GL.TexCoord2(0.0, 1.0);
+				GL.TexCoord2(flipX ? 1.0 : 0.0, 1.0);
 				GL.Vertex2(x, y);
-				GL.TexCoord2(0.0, 0.0);
+				GL.TexCoord2(flipX ? 1.0 : 0.0, 0.0);
 				GL.Vertex2(x, y + height);
-				GL.TexCoord2(1.0, 0.0);
+				GL.TexCoord2(flipX ? 0.0 : 1.0, 0.0);
 				GL.Vertex2(x + width, y + height);
-				GL.TexCoord2(1.0, 1.0);
+				GL.TexCoord2(flipX ? 0.0 : 1.0, 1.0);
 				GL.Vertex2(x + width, y);
 				GL.End();
 				GL.Disable(EnableCap.Texture2D);

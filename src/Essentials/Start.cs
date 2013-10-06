@@ -54,7 +54,7 @@ namespace Essentials {
 			go = new Button(0.8f, 0.5f, 0.2f, 0.3f, Color.White, PathGetter.getPath("res" + Path.DirectorySeparatorChar + "go.png"), true);
 			stop = new Button(0.8f, 0.5f, 0.2f, 0.3f, Color.White, PathGetter.getPath("res" + Path.DirectorySeparatorChar + "stop.png"), false);
 			for(int i = 0; i < add.Length; i++)
-				add[i] = new Button(0.8f - (i * 0.15f), 0.85f, 0.1f, 0.15f, Color.White, PathGetter.getPath(Vehicle.getPath(i)), false);
+				add[i] = new Button(0.8f - (i * 0.15f), 0.85f, 0.1f, 0.15f, Color.White, PathGetter.getPath(Vehicle.getPath(i)), false, i == add.Length - 1 ? true : false);
 			drawer = new Drawer();
 			GL.Enable(EnableCap.Blend);
 			GL.BlendFunc(BlendingFactorSrc.SrcAlpha, BlendingFactorDest.OneMinusSrcAlpha);

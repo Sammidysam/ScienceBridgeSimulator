@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+<svg xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:svg="http://www.w3.org/2000/svg" xmlns="http://www.w3.org/2000/svg" xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd" xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape" width="125.59338" height="230.71487" id="svg2831" version="1.1" inkscape:version="0.47 r22583" sodipodi:docname="littlegirl.svg">
+  <defs id="defs2833">
+    <inkscape:perspective sodipodi:type="inkscape:persp3d" inkscape:vp_x="0 : 526.18109 : 1" inkscape:vp_y="0 : 1000 : 0" inkscape:vp_z="744.09448 : 526.18109 : 1" inkscape:persp3d-origin="372.04724 : 350.78739 : 1" id="perspective2839"/>
+    <inkscape:perspective id="perspective2826" inkscape:persp3d-origin="0.5 : 0.33333333 : 1" inkscape:vp_z="1 : 0.5 : 1" inkscape:vp_y="0 : 1000 : 0" inkscape:vp_x="0 : 0.5 : 1" sodipodi:type="inkscape:persp3d"/>
+    <inkscape:perspective id="perspective2879" inkscape:persp3d-origin="0.5 : 0.33333333 : 1" inkscape:vp_z="1 : 0.5 : 1" inkscape:vp_y="0 : 1000 : 0" inkscape:vp_x="0 : 0.5 : 1" sodipodi:type="inkscape:persp3d"/>
+    <inkscape:perspective id="perspective2928" inkscape:persp3d-origin="0.5 : 0.33333333 : 1" inkscape:vp_z="1 : 0.5 : 1" inkscape:vp_y="0 : 1000 : 0" inkscape:vp_x="0 : 0.5 : 1" sodipodi:type="inkscape:persp3d"/>
+  </defs>
+  <sodipodi:namedview id="base" pagecolor="#ffffff" bordercolor="#666666" borderopacity="1.0" inkscape:pageopacity="0.0" inkscape:pageshadow="2" inkscape:zoom="0.35" inkscape:cx="730.46205" inkscape:cy="-349.99109" inkscape:document-units="px" inkscape:current-layer="layer1" showgrid="false" inkscape:window-width="1024" inkscape:window-height="575" inkscape:window-x="-5" inkscape:window-y="3" inkscape:window-maximized="1"/>
+  <g inkscape:label="Layer 1" inkscape:groupmode="layer" id="layer1" transform="translate(355.46206,48.343776)">
+    <path id="path2899" style="fill:#000000;stroke:#000000;stroke-width:0.23922959px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" d="m -272.16853,27.755025 c -2.3532,6.94088 -4.5216,14.09553 -6.4668,17.71859 -5.3166,1.2335 -10.8795,-3.71919 -10.864,-3.12801 -0.01,11.371739 6.8685,26.434939 11.2597,40.043419 1.2536,5.43185 10.028,32.591126 10.028,32.591126 l 17.967,42.27442 -1.7323,1.53098 c 2.806,4.18478 2.4239,5.57545 7.896,4.45599 5.4318,-1.25348 7.5368,-4.5479 10.7936,-1.46089 3.2567,3.08701 4.0716,7.51473 2.5803,11.38203 -7.1033,1.6714 -24.5517,9.0888 -24.5517,9.0888 l -13.7884,0 -1.2536,-17.47585 -3.3426,0.83573 c 0,0 -10.8639,-32.66439 -12.5352,-40.18527 -1.6713,-7.52112 -18.3847,-27.577147 -18.3847,-27.577147 0,0 -8.7745,24.652267 -11.2813,32.173077 -2.5071,7.52112 -10.8638,34.68034 -10.8638,34.68034 l -3.1259,-1.70477 c -0.6275,4.27869 -4.065,2.57515 -0.2169,5.46539 6.4701,2.6693 9.8107,-3.4244 14.9034,-0.6987 5.0927,2.7257 0.5567,13.2337 0.5567,13.2337 l -40.5301,0 c -1.4523,-8.4572 4.7151,-12.9289 4.8036,-20.26511 l -1.8787,-0.41781 c 0,0 12.1172,-24.02546 14.2065,-33.2178 2.089,-9.19229 9.61,-33.844427 10.0279,-41.783406 0.4178,-7.93874 -0.4179,-32.59094 -2.0893,-34.680089 -1.6713,-2.08921 -11.908,-8.56578 -11.4901,-12.74421 2.0843,-11.86234 8.4634,-22.4676 9.401,-34.4710402 l 16.2957,-13.7884498 -0.8357,-12.11735 6.2674,2.92488 0,-10.86381 -9.6101,-4.17812 1.2535,-3.34275 11.2814,-1.25354 c 0,0 3.7605,-7.521 8.7746,-8.77454 5.0141,-1.25354 15.042,2.50696 17.5491,5.01404 2.5069,2.50708 0.8356,11.6993 0.8356,11.6993 l 8.3567,7.521 -0.8356,4.59623 c 0,0 -10.446,-5.84965 -10.8638,-4.1783 -2.0605,5.55094 -6.6338,9.81511 -10.8636,13.7885698 0,0 2.4829,3.87282 4.1028,8.86136996 0.5597,1.72366004 5.0646,5.66596004 5.8227,7.17133004 0.666,1.32235 -5.9217,0.0299 -5.9562,1.09845 0.031,6.6445602 -0.648,17.8788202 8.0717,19.4743902 0.9109,-2.20258 7.2353,-21.8469702 7.9657,-19.9336302 0.092,0.2415 0.3193,-3.54802 1.2967,-4.94322 0.6543,-0.93393 0.7058,-1.77058004 4.0141,-2.54869004 3.9187,-8.45578996 12.4838,-14.10340976 12.4838,-14.10340976 l 23.4669,9.9105598 c 0,0 -7.6968,-0.54106 -12.3568,10.73359 -4.6601,11.2746502 -8.7584,27.3225602 -8.7584,27.3225602 l -17.7865,-5.75395 z" sodipodi:nodetypes="ccccccccscccccscccccsccccccscccccccccsscccccssccsscccscc"/>
+  </g>
+  <metadata>
+    <rdf:RDF>
+      <cc:Work>
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
+        <cc:license rdf:resource="http://creativecommons.org/licenses/publicdomain/"/>
+        <dc:publisher>
+          <cc:Agent rdf:about="http://openclipart.org/">
+            <dc:title>Open Clip Art Library</dc:title>
+          </cc:Agent>
+        </dc:publisher>
+        <dc:title>Man Silhouette</dc:title>
+        <dc:date>2011-02-24T02:23:57</dc:date>
+        <dc:description/>
+        <dc:source>http://openclipart.org/detail/122209/man-silhouette-by-dear_theophilus</dc:source>
+        <dc:creator>
+          <cc:Agent>
+            <dc:title>dear_theophilus</dc:title>
+          </cc:Agent>
+        </dc:creator>
+        <dc:subject>
+          <rdf:Bag>
+            <rdf:li>black and white</rdf:li>
+            <rdf:li>clip art</rdf:li>
+            <rdf:li>clipart</rdf:li>
+            <rdf:li>man</rdf:li>
+            <rdf:li>map</rdf:li>
+            <rdf:li>people</rdf:li>
+            <rdf:li>silhouette</rdf:li>
+            <rdf:li>walk</rdf:li>
+            <rdf:li>walking</rdf:li>
+          </rdf:Bag>
+        </dc:subject>
+      </cc:Work>
+      <cc:License rdf:about="http://creativecommons.org/licenses/publicdomain/">
+        <cc:permits rdf:resource="http://creativecommons.org/ns#Reproduction"/>
+        <cc:permits rdf:resource="http://creativecommons.org/ns#Distribution"/>
+        <cc:permits rdf:resource="http://creativecommons.org/ns#DerivativeWorks"/>
+      </cc:License>
+    </rdf:RDF>
+  </metadata>
+</svg>
